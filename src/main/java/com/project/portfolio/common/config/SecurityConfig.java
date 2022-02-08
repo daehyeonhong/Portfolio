@@ -1,4 +1,4 @@
-package com.project.portfolio.config;
+package com.project.portfolio.common.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
