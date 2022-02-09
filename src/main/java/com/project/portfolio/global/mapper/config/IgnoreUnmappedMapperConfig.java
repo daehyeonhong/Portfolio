@@ -1,4 +1,4 @@
-package com.project.portfolio.mapper.config;
+package com.project.portfolio.global.mapper.config;
 
 import org.mapstruct.MapperConfig;
 import org.mapstruct.ReportingPolicy;

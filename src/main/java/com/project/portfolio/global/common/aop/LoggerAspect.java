@@ -1,4 +1,4 @@
-package com.project.portfolio.common.aop;
+package com.project.portfolio.global.common.aop;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -12,19 +12,14 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class LoggerAspect {
 
-    @Around(
-            "execution(* com.project.portfolio.controller..*Controller.*(..))||" +
-                    "execution(* com.project.portfolio.service..*Impl.*(..))"
-    )
+    @Around("@annotation(org.springframework.web.bind.annotation.RestController)")
     public Object printLog(ProceedingJoinPoint joinPoint) throws Throwable {
         final Signature signature = joinPoint.getSignature();
         log.info("{}.{}()", signature.getDeclaringTypeName(), signature.getName());
         return joinPoint.proceed();
     }
 
-    @Around(
-            "execution(* com.project.portfolio.repository..*Repository.*(..))"
-    )
+    @Around("@annotation(org.springframework.stereotype.Repository)")
     public Object printArgs(ProceedingJoinPoint joinPoint) throws Throwable {
         final Signature signature = joinPoint.getSignature();
         log.info("{}.{}()", signature.getDeclaringTypeName(), signature.getName());

@@ -1,4 +1,4 @@
-package com.project.portfolio.controller;
+package com.project.portfolio.module.index.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

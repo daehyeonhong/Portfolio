@@ -1,4 +1,4 @@
-package com.project.portfolio.mapper.config;
+package com.project.portfolio.global.mapper.config;
 
 import org.mapstruct.BeanMapping;
 import org.mapstruct.MappingTarget;
