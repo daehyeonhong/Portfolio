@@ -3,13 +3,17 @@ package com.project.portfolio.domains.member.service;
 import com.project.portfolio.domains.member.domain.response.LoginResponse;
 import com.project.portfolio.domains.member.domain.response.UserDetailsDto;
 import com.project.portfolio.domains.member.repository.MemberRepository;
+import com.project.portfolio.domains.model.enumerate.authority.Authority;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -31,9 +35,10 @@ public class DefaultUserDetailService implements UserDetailsService {
         return UserDetailsDto.builder()
                 .username(username)
                 .password(member.getPassword())
-//                .authorities(member.getAuthorities().stream()
-//                        .map(authority -> new SimpleGrantedAuthority(authority.getAuthority()))
-//                        .collect(Collectors.toSet()))
+                .authorities(member.getAuthorities().stream()
+                        .map(authority -> new SimpleGrantedAuthority(authority.getAuthority()))
+                        .collect(Collectors.toSet()))
+                .authorities(Set.of(Authority.USER))
                 .enabled(member.isActivated())
                 .accountNonExpired(true)
                 .accountNonLocked(true)
